@@ -21,7 +21,7 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer as SIA
 CLIENT_ID = os.environ.get('REDDIT_CLIENT_ID')
 CLIENT_SECRET = os.environ.get('REDDIT_CLIENT_SECRET')
 USER_AGENT = os.environ.get('REDDIT_USER_AGENT')
-NAP_TIME = os.environ.get('REDDIT_EXTRACTOR_NAPTIME', 900)
+NAP_TIME = int(os.environ.get('REDDIT_EXTRACTOR_NAPTIME', 900))
 
 
 class RedditHeadlineExtractor:
