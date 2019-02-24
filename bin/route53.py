@@ -37,13 +37,15 @@ def get_elb_dns():
         return None
     return dns
 
+
 elb = get_elb_dns()
 while elb is None:
     elb = get_elb_dns()
     if elb is None:
         print('ELB is not ready just yet, waiting..')
-        sleep(5)
+        sleep(20)
+
 print('Creating DNS records')
-subs = ['elb', 'app', 'lab', 'dev']
+subs = ['lab']
 for sub in subs:
     add_cname_record(f'{sub}.zigdata.org', elb)
