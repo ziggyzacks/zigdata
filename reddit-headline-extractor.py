@@ -7,6 +7,7 @@ import s3fs
 from datetime import datetime
 from time import sleep
 import logging
+from concurrent.futures import ThreadPoolExecutor
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s - %(funcName)s - %(message)s')
 logger = logging.getLogger("reddit")
@@ -22,6 +23,11 @@ CLIENT_ID = os.environ.get('REDDIT_CLIENT_ID')
 CLIENT_SECRET = os.environ.get('REDDIT_CLIENT_SECRET')
 USER_AGENT = os.environ.get('REDDIT_USER_AGENT')
 NAP_TIME = int(os.environ.get('REDDIT_EXTRACTOR_NAPTIME', 900))
+SUBREDDITS = [
+    "sports",
+    "politics",
+    "news"
+]
 
 
 class RedditHeadlineExtractor:
@@ -51,7 +57,17 @@ class RedditHeadlineExtractor:
             headlines = None
         return headlines
 
-    def gather_headlines(self, subreddit='politics'):
+    def gather_headlines(self, subreddits=None):
+        if subreddits is None:
+            subreddits = SUBREDDITS
+
+        rows = []
+        with ThreadPoolExecutor(4) as pool:
+            for hls in pool.map(self._gather_headlines, subreddits):
+                rows.extend(hls)
+        return rows
+
+    def _gather_headlines(self, subreddit):
         new_headlines = set()
         records = []
 
@@ -63,7 +79,6 @@ class RedditHeadlineExtractor:
                 record = {
                     "title": title,
                     "ups": submission.ups,
-                    "downs": submission.downs,
                     "subreddit": subreddit,
                     "created_epoch": submission.created_utc,
                     "ncomments": submission.num_comments
