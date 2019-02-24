@@ -1,6 +1,3 @@
-export KOPS_STATE_STORE=s3://zigdata-org-state-store
-export NAME=zigdata.org
-
 kops create cluster \
         --zones us-east-1a \
         --node-count 1 \
