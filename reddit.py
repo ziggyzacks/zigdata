@@ -29,9 +29,3 @@ for line in headlines:
 df = pd.DataFrame.from_records(results)
 print(df.head(10))
 df.to_parquet('headlines.parquet')
-
-vectorizer = CountVectorizer()
-vectorizer.fit_transform(df.headline.values)
-
-with open('vectorizer.pkl') as f:
-    pickle.dumps(vectorizer)
