@@ -8,15 +8,8 @@ RUN mkdir -p $HOME
 
 WORKDIR $HOME
 COPY env.yaml .
-COPY reddit.py .
+COPY reddit-headline-extractor.py .
 COPY services .
-
-# setup s6 services
-RUN mkdir -p /etc/services.d/jupyterlab && \
-    cp jupyterlab.run /etc/services.d/jupyterlab/run && \
-    mkdir -p /etc/services.d/reddit && \
-    cp reddit.run /etc/services.d/reddit/run && \
-    rm -rf jupyterlab.run reddit.run
 
 # set up conda env
 RUN apk add --no-cache --virtual .build-deps gcc musl-dev build-base && \
@@ -30,6 +23,14 @@ EXPOSE 8686
 
 ADD https://github.com/just-containers/s6-overlay/releases/download/v1.21.8.0/s6-overlay-amd64.tar.gz /tmp/
 RUN tar xzf /tmp/s6-overlay-amd64.tar.gz -C /
+
+# setup s6 services
+RUN mkdir -p /etc/services.d/jupyterlab && \
+    cp jupyterlab.run /etc/services.d/jupyterlab/run && \
+    mkdir -p /etc/services.d/reddit && \
+    cp reddit.run /etc/services.d/reddit/run && \
+    rm -rf jupyterlab.run reddit.run
+
 ENTRYPOINT ["/init"]
 
 ENV PATH /opt/conda/envs/zigdata/bin:$PATH

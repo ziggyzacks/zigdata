@@ -9,3 +9,5 @@ metadata:
     helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version }}
 data:
   REDDIT_USER_AGENT: {{ .Values.app.reddit.user_agent }}
+  REDDIT_EXTRACTOR_NAPTIME: {{ .Values.app.reddit.naptime }}
+
