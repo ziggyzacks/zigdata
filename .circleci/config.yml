@@ -7,5 +7,6 @@ jobs:
       - checkout
       - run: docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
       - run: docker build -t zigdata .
-      - run: docker tag zigdata zigzacks/zigdata:latest
+      - run: docker tag zigdata zigzacks/zigdata:$CIRCLE_BRANCH-$CIRCLE_SHA1
+      - run: docker tag zigdata zigzacks/zigdata:$CIRCLE_BRANCH
       - run: docker push zigzacks/zigdata
