@@ -4,9 +4,9 @@ jobs:
     machine: true
     steps:
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
 
+      - setup_remote_docker
+      
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -17,7 +17,7 @@ jobs:
       - run: docker build -t zigdata .
       - run: docker tag zigdata zigzacks/zigdata:latest
       - run: docker push zigzacks/zigdata
-        
+
       - save_cache:
           paths:
             - ./venv
