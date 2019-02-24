@@ -35,6 +35,11 @@ spec:
             httpGet:
               path: /
               port: http
+          envFrom:
+            - secretRef:
+                name: reddit-secrets
+            - configMapRef:
+                name: reddit-envvars
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- with .Values.nodeSelector }}

@@ -7,6 +7,6 @@
     - helm init
     - ...
 4. kubectl create -f https://k8s.io/examples/admin/namespace-dev.json
-5. helm install --name zigdata --namespace development .
+5. helm upgrade --dry-run --debug --name zigdata --namespace development --values values.yaml --values secrets.yaml .
     - anytime the app is redeployed run `python route53.py` to add the elb's dns to the route53 records for that domain
     - will create {elb,app,lab,dev}.zigdata.org subdomains
