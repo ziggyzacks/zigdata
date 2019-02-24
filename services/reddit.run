@@ -1,2 +1,2 @@
 #!/usr/bin/with-contenv sh
-python /usr/local/zigdata.org/reddit.py
+python $HOME/reddit.py
