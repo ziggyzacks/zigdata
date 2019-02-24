@@ -1,0 +1,22 @@
+replicaCount: 1
+image:
+  repository: zigzacks/zigdata
+  tag: latest
+  pullPolicy: IfNotPresent
+service:
+  name: dockerhub
+  type: ClusterIP
+  externalPort: 8090
+  internalPort: 8090
+
+keel:
+  # keel policy (all/major/minor/patch/force)
+  policy: all
+  # trigger type, defaults to events such as pubsub, webhooks
+  trigger: poll
+  # polling schedule
+  pollSchedule: "@every 1m"
+  # images to track and update
+  images:
+    - repository: image.repository
+      tag: image.tag
