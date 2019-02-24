@@ -1,10 +1,12 @@
 version: 2
 jobs:
   build:
+    docker:
+      - image: circleci/python:3.7
     steps:
       - checkout
-
-      - setup_remote_docker
+      - setup_remote_docker:
+          docker_layer_caching: true
 
       # Download and cache dependencies
       - restore_cache:
