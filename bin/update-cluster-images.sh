@@ -15,17 +15,7 @@ function log {
     echo "$(date) - $1"
 }
 
-#elb=$(check_elb)
-#while [ $elb -eq 0 ]
-#do
-#    elb=$(check_elb)
-#    log "waiting for ELB.."
-#    sleep 5
-#done
-#log $elb
-#
-## dns
-#cd ../bin
-#python route53.py
-# logs
+log "updating the DNS"
+cd ..
+python bin/route53.py
 stern --since 5m -n development zigdata
