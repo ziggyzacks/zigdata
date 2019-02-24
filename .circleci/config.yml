@@ -7,19 +7,7 @@ jobs:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: true
-
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "env.yaml" }}
-            - v1-dependencies-
-
       - run: docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
       - run: docker build -t zigdata .
       - run: docker tag zigdata zigzacks/zigdata:latest
       - run: docker push zigzacks/zigdata
-
-      - save_cache:
-          paths:
-            - ./venv
-          key: v1-dependencies-{{ checksum "env.yaml" }}
