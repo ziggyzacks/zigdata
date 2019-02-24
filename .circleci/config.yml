@@ -1,12 +1,10 @@
 version: 2
 jobs:
   build:
-    docker:
-      - image: circleci/python:3.7
+    machine:
+      docker_layer_caching: true
     steps:
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
       - run: docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
       - run: docker build -t zigdata .
       - run: docker tag zigdata zigzacks/zigdata:latest
