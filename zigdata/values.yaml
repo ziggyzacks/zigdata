@@ -48,3 +48,4 @@ affinity: {}
 app:
   reddit:
     user_agent: zarfjohnson
+    naptime: 900

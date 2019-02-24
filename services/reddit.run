@@ -1,2 +1,2 @@
 #!/usr/bin/with-contenv sh
-python $HOME/reddit.py
+python $HOME/reddit-headline-extractor.py
