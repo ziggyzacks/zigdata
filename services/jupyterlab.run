@@ -1,2 +1,2 @@
 #!/usr/bin/with-contenv sh
-jupyter-lab --debug --allow-root --no-browser --port=8686 --ip=0.0.0.0
+jupyter-lab --allow-root --no-browser --port=8686 --ip=0.0.0.0
