@@ -1,0 +1,27 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.6.1
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "env.yaml" }}
+            - v1-dependencies-
+
+      - run:
+          name: build tag and push
+          command: |
+            docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
+            sh build-tag-push.sh
+
+      - save_cache:
+          paths:
+            - ./venv
+          key: v1-dependencies-{{ checksum "env.yaml" }}
