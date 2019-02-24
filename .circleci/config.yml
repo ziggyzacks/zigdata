@@ -1,15 +1,11 @@
 version: 2
 jobs:
   build:
-    - setup_remote_docker
-    
-    docker:
-      - image: circleci/python:3.6.1
-
-    working_directory: ~/repo
-
+    machine: true
     steps:
       - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
 
       # Download and cache dependencies
       - restore_cache:
@@ -17,12 +13,11 @@ jobs:
             - v1-dependencies-{{ checksum "env.yaml" }}
             - v1-dependencies-
 
-      - run:
-          name: build tag and push
-          command: |
-            docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
-            sh build-tag-push.sh
-
+      - run: docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
+      - run: docker build -t zigdata .
+      - run: docker tag zigdata zigzacks/zigdata:latest
+      - run: docker push zigzacks/zigdata
+        
       - save_cache:
           paths:
             - ./venv
