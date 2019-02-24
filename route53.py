@@ -33,5 +33,7 @@ def get_elb_dns():
     dns = elb_client.describe_load_balancers()['LoadBalancerDescriptions'][0]['DNSName']
     return dns
 
-add_cname_record('elb.zigdata.org', get_elb_dns())
-add_cname_record('app.zigdata.org', get_elb_dns())
+elb = get_elb_dns()
+subs = ['elb', 'app', 'lab', 'dev']
+for sub in subs:
+    add_cname_record(f'{sub}.zigdata.org', elb)
