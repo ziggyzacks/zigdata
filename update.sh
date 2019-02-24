@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-# update image
-./build-tag-push.sh
 cd zigdata
 # delete release
 helm del --purge zigdata
