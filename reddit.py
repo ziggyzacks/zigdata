@@ -4,7 +4,7 @@ import pandas as pd
 
 import praw
 import nltk
-import datetime
+from datetime import datetime
 from time import sleep, time
 
 nltk.download('vader_lexicon')
