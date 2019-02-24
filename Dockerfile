@@ -2,21 +2,26 @@
 FROM frolvlad/alpine-miniconda3
 
 # gcc dependencies and such
-RUN apk add --no-cache bash curl build-base ca-certificates git openssh
-RUN apk add --no-cache --virtual .build-deps gcc musl-dev
+RUN apk add --no-cache bash curl ca-certificates git openssh
 ENV HOME /usr/local/zigdata.org
 RUN mkdir -p $HOME
+
 WORKDIR $HOME
 COPY . .
 # set up conda env
-RUN conda env create -f env.yaml
-RUN source activate zigdata
-RUN apk del .build-deps gcc musl-dev
+RUN apk add --no-cache --virtual .build-deps gcc musl-dev build-base && \
+    conda env create -f env.yaml && \
+    source activate zigdata && \
+    apk del .build-deps gcc musl-dev build-base && \
+    rm -rf /opt/conda/pkgs/*
+
 # expose the port
 EXPOSE 8686
-# let's supervise with s6
+
 ADD https://github.com/just-containers/s6-overlay/releases/download/v1.21.8.0/s6-overlay-amd64.tar.gz /tmp/
 RUN tar xzf /tmp/s6-overlay-amd64.tar.gz -C /
 ENTRYPOINT ["/init"]
+
+ENV PATH /opt/conda/envs/zigdata/bin:$PATH
 # fire up jupyterlab
-CMD ["jupyterlab",  "--no-browser", "--port 8686", "--host 0.0.0.0"]
+CMD ["jupyter-lab", "--debug", "--allow-root", "--no-browser", "--port=8686", "--ip=0.0.0.0"]
