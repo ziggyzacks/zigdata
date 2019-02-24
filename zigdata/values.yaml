@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: zigzacks/zigdata
-  tag: latest
+  tag: master
   pullPolicy: Always
 
 nameOverride: ""
