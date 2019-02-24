@@ -15,6 +15,8 @@ RUN apk add --no-cache --virtual .build-deps gcc musl-dev build-base && \
     apk del .build-deps gcc musl-dev build-base && \
     rm -rf /opt/conda/pkgs/*
 
+RUN python -m nltk.downloader all
+
 # expose the port
 EXPOSE 8686
 
