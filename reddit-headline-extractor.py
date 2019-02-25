@@ -8,6 +8,7 @@ from datetime import datetime
 from time import sleep
 import logging
 from concurrent.futures import ThreadPoolExecutor
+from multiprocessing import cpu_count
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s - %(funcName)s - %(message)s')
 logger = logging.getLogger("reddit")
@@ -23,11 +24,7 @@ CLIENT_ID = os.environ.get('REDDIT_CLIENT_ID')
 CLIENT_SECRET = os.environ.get('REDDIT_CLIENT_SECRET')
 USER_AGENT = os.environ.get('REDDIT_USER_AGENT')
 NAP_TIME = int(os.environ.get('REDDIT_EXTRACTOR_NAPTIME', 900))
-SUBREDDITS = [
-    "sports",
-    "politics",
-    "news"
-]
+SUBREDDITS = pd.read_html('http://redditmetrics.com/top')[0].Reddit.str.replace('/r/', '').unique().tolist()
 
 
 class RedditHeadlineExtractor:
@@ -62,7 +59,7 @@ class RedditHeadlineExtractor:
             subreddits = SUBREDDITS
 
         rows = []
-        with ThreadPoolExecutor(4) as pool:
+        with ThreadPoolExecutor(cpu_count() * 2) as pool:
             for hls in pool.map(self._gather_headlines, subreddits):
                 rows.extend(hls)
         return rows
