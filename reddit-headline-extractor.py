@@ -101,9 +101,9 @@ if __name__ == "__main__":
     extractor = RedditHeadlineExtractor.from_environment()
     headlines = extractor.gather_headlines()
     df = extractor.build_df_from_headlines(headlines)
-    logger.info('Persiting to s3')
-    df.to_parquet(f's3://zigdata.org/reddit-headlines/{datetime.now().strftime("%Y-%m-%d_%H%M%S")}.parquet.gzip',
-                  compression='gzip')
+    path = f's3://zigdata.org/reddit-headlines/{datetime.now().strftime("%Y-%m-%d_%H%M%S")}.parquet.gzip'
+    logger.info(f'Persiting to s3 in path: {path}')
+    df.to_parquet(path, compression='gzip')
     logger.info(f'Sleeping for {NAP_TIME // 60} minutes')
     # 15 minutes
     sleep(NAP_TIME)
