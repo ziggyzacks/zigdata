@@ -4,6 +4,7 @@ import pandas as pd
 import praw
 import nltk
 import s3fs
+import time
 from datetime import datetime
 from time import sleep
 import logging
@@ -78,7 +79,8 @@ class RedditHeadlineExtractor:
                     "ups": submission.ups,
                     "subreddit": subreddit,
                     "created_epoch": submission.created_utc,
-                    "ncomments": submission.num_comments
+                    "ncomments": submission.num_comments,
+                    "extracted_epoch": time.time()
                 }
                 records.append(record)
         logger.info(f"Found {len(new_headlines)} new headlines in the {subreddit} subreddit")
