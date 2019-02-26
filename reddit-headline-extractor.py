@@ -70,7 +70,7 @@ class RedditHeadlineExtractor:
         records = []
 
         logger.info(f"Fetching new headlines from {subreddit}")
-        for submission in self.reddit.subreddit(subreddit).new(limit=None):
+        for rank, submission in enumerate(self.reddit.subreddit(subreddit).new(limit=None)):
             title = submission.title
             if title not in new_headlines:
                 new_headlines.add(title)
@@ -80,7 +80,8 @@ class RedditHeadlineExtractor:
                     "subreddit": subreddit,
                     "created_epoch": submission.created_utc,
                     "ncomments": submission.num_comments,
-                    "extracted_epoch": time.time()
+                    "extracted_epoch": time.time(),
+                    "rank": rank
                 }
                 records.append(record)
         logger.info(f"Found {len(new_headlines)} new headlines in the {subreddit} subreddit")
