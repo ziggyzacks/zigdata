@@ -25,16 +25,16 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: {{ .Values.service.targetPort }}
+              containerPort: {{ .Values.service.port }}
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
+          {{/*livenessProbe:*/}}
+            {{/*httpGet:*/}}
+              {{/*path: /*/}}
+              {{/*port: http*/}}
+          {{/*readinessProbe:*/}}
+            {{/*httpGet:*/}}
+              {{/*path: /*/}}
+              {{/*port: http*/}}
           envFrom:
             - secretRef:
                 name: reddit-secrets

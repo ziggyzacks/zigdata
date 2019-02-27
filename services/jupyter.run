@@ -1,0 +1,2 @@
+#!/usr/bin/with-contenv sh
+jupyter notebook --debug --allow-root --ip=0.0.0.0 --no-browser --NotebookApp.allow_origin='*'
