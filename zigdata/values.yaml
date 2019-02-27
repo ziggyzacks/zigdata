@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: zigzacks/zigdata
-  tag: jupyter
+  tag: lektor
   pullPolicy: Always
 
 nameOverride: ""
