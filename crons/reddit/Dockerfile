@@ -1,5 +1,7 @@
 FROM zigzacks/zigdata:base
 
+RUN pip install redis
+
 COPY reddit-headline-extractor.py .
 COPY reddit.run .
 

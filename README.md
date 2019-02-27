@@ -9,4 +9,5 @@ export NAME=zigdata.org
 3. ./bin/bootstrap-tls.sh
     - kubectl apply -f zigdata/staging-issuer.yaml
     - kubectl apply -f zigdata/production-issuer.yaml
+4. helm install --name redis stable/redis --values redis-production-values
 4. ./bin/deploy.sh

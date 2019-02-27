@@ -4,7 +4,7 @@ cd zigdata
 # delete release if present
 helm del --purge zigdata
 # install
-helm install --debug --name zigdata --namespace development --values values.yaml --values secrets.yaml .
+helm install --debug --name zigdata --namespace default --values values.yaml --values secrets.yaml .
 function log {
     echo "$(date) - $1"
 }
