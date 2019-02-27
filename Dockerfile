@@ -16,13 +16,4 @@ RUN conda env create -f env.yaml && source activate zigdata
 ADD https://github.com/just-containers/s6-overlay/releases/download/v1.21.8.0/s6-overlay-amd64.tar.gz /tmp/
 RUN tar xzf /tmp/s6-overlay-amd64.tar.gz -C /
 
-# nginx
-RUN adduser -D -g 'www' www && \
-    mkdir /www && \
-    chown -R www:www /var/lib/nginx && \
-    chown -R www:www /www
-
-COPY config/nginx.conf /etc/nginx/nginx.conf
-COPY config/index.html /www/index.html
-
 ENV PATH /opt/conda/envs/zigdata/bin:$PATH
