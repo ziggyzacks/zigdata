@@ -7,8 +7,8 @@ jobs:
       - checkout
       - run: docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
       - run: docker build -t jupyter apps/jupyter
-      - run: docker tag zigdata zigzacks/zigdata:jupyter
+      - run: docker tag jupyter zigzacks/zigdata:jupyter
       - run: docker push zigzacks/zigdata
       - run: docker build -t reddit crons/reddit
-      - run: docker tag zigdata zigzacks/zigdata:reddit
+      - run: docker tag reddit zigzacks/zigdata:reddit
       - run: docker push zigzacks/zigdata
