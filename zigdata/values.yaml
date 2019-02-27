@@ -63,7 +63,7 @@ jobs:
       repository: zigzacks/zigdata
       tag: reddit
       pullPolicy: Always
-    schedule: "*/30 * * * *"
+    schedule: "*/5 * * * *"
     failedJobsHistoryLimit: 1
     successfulJobsHistoryLimit: 3
     concurrencyPolicy: Allow

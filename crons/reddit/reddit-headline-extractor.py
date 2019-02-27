@@ -5,6 +5,7 @@ import praw
 import nltk
 import s3fs
 import time
+import hashlib
 from datetime import datetime
 from time import sleep
 import logging
@@ -36,7 +37,10 @@ class RedditHeadlineExtractor:
                                   user_agent=user_agent)
         self.sia = SIA()
         self.fs = s3fs.S3FileSystem()
-        self.redis = redis.Redis(host='redis', port=6379, db=0)
+        self.redis = redis.Redis(host='zigdata-redis-master', port=6379, db=0)
+
+    def _hash(self, s):
+        return hashlib.sha224(s.encode()).hexdigest()
 
     @classmethod
     def from_environment(cls):
@@ -74,17 +78,24 @@ class RedditHeadlineExtractor:
         for rank, submission in enumerate(self.reddit.subreddit(subreddit).new(limit=None)):
             title = submission.title
             if title not in new_headlines:
-                new_headlines.add(title)
-                record = {
-                    "title": title,
-                    "ups": submission.ups,
-                    "subreddit": subreddit,
-                    "created_epoch": submission.created_utc,
-                    "ncomments": submission.num_comments,
-                    "extracted_epoch": time.time(),
-                    "rank": rank
-                }
-                records.append(record)
+                key = f"title:{self._hash(title)}"
+                if self.redis.exists(key):
+                    logger.info(f"{key} already run")
+                    continue
+                else:
+                    record = {
+                        "title": title,
+                        "ups": submission.ups,
+                        "subreddit": subreddit,
+                        "created_epoch": submission.created_utc,
+                        "ncomments": submission.num_comments,
+                        "extracted_epoch": time.time(),
+                        "rank": rank
+                    }
+                    records.append(record)
+                    new_headlines.add(title)
+                    self.redis.set(key, 1, ex=300)  # 5 minutes
+
         logger.info(f"Found {len(new_headlines)} new headlines in the {subreddit} subreddit")
         return records
 
