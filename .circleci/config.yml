@@ -6,7 +6,9 @@ jobs:
     steps:
       - checkout
       - run: docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
-      - run: docker build -t zigdata .
-      - run: docker tag zigdata zigzacks/zigdata:$CIRCLE_BRANCH-$CIRCLE_SHA1
-      - run: docker tag zigdata zigzacks/zigdata:$CIRCLE_BRANCH
+      - run: docker build -t jupyter apps/jupyter
+      - run: docker tag zigdata zigzacks/zigdata:jupyter
+      - run: docker push zigzacks/zigdata
+      - run: docker build -t reddit crons/reddit
+      - run: docker tag zigdata zigzacks/zigdata:reddit
       - run: docker push zigzacks/zigdata

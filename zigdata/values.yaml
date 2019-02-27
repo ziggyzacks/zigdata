@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: zigzacks/zigdata
-  tag: master
+  tag: jupyter
   pullPolicy: Always
 
 nameOverride: ""
@@ -15,7 +15,7 @@ fullnameOverride: ""
 
 service:
   type: ClusterIP
-  port: 80
+  port: 8888
   targetPort: http
 
 ingress:
@@ -57,3 +57,15 @@ app:
   reddit:
     user_agent: zarfjohnson
     naptime: 900
+
+jobs:
+  - name: reddit
+    image:
+      repository: zigzacks/zigdata
+      tag: reddit
+      pullPolicy: Always
+    schedule: "*/15 * * * *"
+    failedJobsHistoryLimit: 1
+    successfulJobsHistoryLimit: 3
+    concurrencyPolicy: Allow
+    restartPolicy: OnFailure
