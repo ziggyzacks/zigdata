@@ -37,9 +37,7 @@ spec:
               {{/*port: http*/}}
           envFrom:
             - secretRef:
-                name: reddit-secrets
-            - configMapRef:
-                name: reddit-envvars
+                name: aws-secrets
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- with .Values.nodeSelector }}

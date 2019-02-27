@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: zigzacks/zigdata
-  tag: lektor
+  tag: blog
   pullPolicy: Always
 
 nameOverride: ""
@@ -63,8 +63,15 @@ jobs:
       repository: zigzacks/zigdata
       tag: reddit
       pullPolicy: Always
-    schedule: "*/15 * * * *"
+    schedule: "*/5 * * * *"
     failedJobsHistoryLimit: 1
     successfulJobsHistoryLimit: 3
     concurrencyPolicy: Allow
     restartPolicy: OnFailure
+    envFrom:
+      - secretRef:
+          name: reddit-secrets
+      - secretRef:
+          name: aws-secrets
+      - configMapRef:
+          name: reddit-envvars
