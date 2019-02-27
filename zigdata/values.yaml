@@ -56,7 +56,6 @@ affinity: {}
 app:
   reddit:
     user_agent: zarfjohnson
-    naptime: 900
 
 jobs:
   - name: reddit
