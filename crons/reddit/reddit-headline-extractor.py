@@ -10,6 +10,7 @@ from datetime import datetime
 from time import sleep
 import logging
 import redis
+from redis import BlockingConnectionPool
 from concurrent.futures import ThreadPoolExecutor
 from multiprocessing import cpu_count
 
@@ -37,7 +38,7 @@ class RedditHeadlineExtractor:
                                   user_agent=user_agent)
         self.sia = SIA()
         self.fs = s3fs.S3FileSystem()
-        self.redis = redis.Redis(host='zigdata-redis-master', port=6379, db=0)
+        self.redis = redis.Redis(connection_pool=BlockingConnectionPool(max_connections=10), host='zigdata-redis-master', port=6379, db=0)
 
     def _hash(self, s):
         return hashlib.sha224(s.encode()).hexdigest()

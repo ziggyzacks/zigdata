@@ -12,4 +12,4 @@ function log {
 log "updating the DNS"
 cd ..
 python bin/route53.py
-stern --since 5m -n development zigdata
+stern --since 5m zigdata
