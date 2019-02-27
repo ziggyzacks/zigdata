@@ -1,4 +1,4 @@
-FROM zigdata:base
+FROM zigzacks/zigdata:base
 
 COPY jupyter.run .
 
