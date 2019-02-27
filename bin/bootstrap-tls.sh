@@ -12,6 +12,11 @@ kubectl label namespace cert-manager certmanager.k8s.io/disable-validation=true
 # Update your local Helm chart repository cache
 helm repo update
 
+# nginx ingress
+helm install stable/nginx-ingress --name zigdata-ingress \
+    --set controller.stats.enabled=true \
+    --set controller.metrics.enabled=true
+
 # Install the cert-manager Helm chart
 helm install \
   --name cert-manager \

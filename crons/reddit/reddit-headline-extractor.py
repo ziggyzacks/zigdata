@@ -105,7 +105,4 @@ if __name__ == "__main__":
     path = f's3://zigdata.org/reddit-headlines/{datetime.now().strftime("%Y-%m-%d_%H%M%S")}.parquet.gzip'
     logger.info(f'Persiting to s3 in path: {path}')
     df.to_parquet(path, compression='gzip')
-    logger.info(f'Sleeping for {NAP_TIME // 60} minutes')
-    # 15 minutes
-    sleep(NAP_TIME)
     sys.exit(0)
