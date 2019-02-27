@@ -1,0 +1,3 @@
+#!/usr/bin/with-contenv sh
+cd $HOME/blog/zigdata
+lektor server --port 8888
