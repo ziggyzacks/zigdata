@@ -8,6 +8,7 @@ import time
 from datetime import datetime
 from time import sleep
 import logging
+import redis
 from concurrent.futures import ThreadPoolExecutor
 from multiprocessing import cpu_count
 
@@ -35,6 +36,7 @@ class RedditHeadlineExtractor:
                                   user_agent=user_agent)
         self.sia = SIA()
         self.fs = s3fs.S3FileSystem()
+        self.redis = redis.Redis(host='redis', port=6379, db=0)
 
     @classmethod
     def from_environment(cls):
