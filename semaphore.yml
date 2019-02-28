@@ -1,0 +1,21 @@
+version: v1.0
+name: zigdata
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+
+blocks:
+  - name: Build, tag, & push
+    task:
+      jobs:
+      - name: build
+        commands:
+          - checkout
+          - sleep 1
+      - name: tag
+        commands:
+          - sleep 1
+      - name: push
+        commands:
+          - sleep 1
