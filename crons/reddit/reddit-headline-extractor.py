@@ -45,7 +45,10 @@ class RedditHeadlineExtractor:
             raise Exception("Redis connection not healthy")
 
     def _check_redis(self):
-        return self.redis.ping()
+        try:
+            return self.redis.ping()
+        except:
+            return False
 
     def _hash(self, s):
         return hashlib.sha224(s.encode()).hexdigest()
