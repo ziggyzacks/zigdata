@@ -8,7 +8,15 @@ COPY . blog
 RUN mkdir -p /etc/services.d/lektor && \
     mv blog/lektor.run /etc/services.d/lektor/run
 
+# nginx
+RUN adduser -D -g 'www' www && \
+    mkdir /www && \
+    chown -R www:www /var/lib/nginx && \
+    chown -R www:www /www
+
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
+
 # expose the port
-EXPOSE 8888
+EXPOSE 80
 ENTRYPOINT ["/init"]
 CMD []
