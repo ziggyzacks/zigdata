@@ -85,23 +85,17 @@ class RedditHeadlineExtractor:
         for rank, submission in enumerate(self.reddit.subreddit(subreddit).new(limit=None)):
             title = submission.title
             if title not in new_headlines:
-                key = f"title:{self._hash(title)}"
-                if self.redis.exists(key):
-                    logger.info(f"{key} already run")
-                    continue
-                else:
-                    record = {
-                        "title": title,
-                        "ups": submission.ups,
-                        "subreddit": subreddit,
-                        "created_epoch": submission.created_utc,
-                        "ncomments": submission.num_comments,
-                        "extracted_epoch": time.time(),
-                        "rank": rank
-                    }
-                    records.append(record)
-                    new_headlines.add(title)
-                    self.redis.set(key, 1, ex=300)  # 5 minutes
+                record = {
+                    "title": title,
+                    "ups": submission.ups,
+                    "subreddit": subreddit,
+                    "created_epoch": submission.created_utc,
+                    "ncomments": submission.num_comments,
+                    "extracted_epoch": time.time(),
+                    "rank": rank
+                }
+                records.append(record)
+                new_headlines.add(title)
 
         logger.info(f"Found {len(new_headlines)} new headlines in the {subreddit} subreddit")
         return records
