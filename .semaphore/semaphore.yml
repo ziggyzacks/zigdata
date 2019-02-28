@@ -12,18 +12,18 @@ blocks:
       - name: build, tag, push
         commands:
           - checkout
-          - echo $DOCKER_USERNAME
-          - echo $DOCKER_PASSWORD
-          - docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
-          - docker build -t base .
-          - docker tag base zigzacks/zigdata:base
-          - docker push zigzacks/zigdata
-          - docker build -t jupyter apps/jupyter
-          - docker tag jupyter zigzacks/zigdata:jupyter
-          - docker push zigzacks/zigdata
-          - docker build -t reddit crons/reddit
-          - docker tag reddit zigzacks/zigdata:reddit
-          - docker push zigzacks/zigdata
-          - docker build -t blog apps/blog
-          - docker tag blog zigzacks/zigdata:blog
-          - docker push zigzacks/zigdata
+#          - echo $DOCKER_USERNAME
+#          - echo $DOCKER_PASSWORD
+#          - docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
+#          - docker build -t base .
+#          - docker tag base zigzacks/zigdata:base
+#          - docker push zigzacks/zigdata
+#          - docker build -t jupyter apps/jupyter
+#          - docker tag jupyter zigzacks/zigdata:jupyter
+#          - docker push zigzacks/zigdata
+#          - docker build -t reddit crons/reddit
+#          - docker tag reddit zigzacks/zigdata:reddit
+#          - docker push zigzacks/zigdata
+#          - docker build -t blog apps/blog
+#          - docker tag blog zigzacks/zigdata:blog
+#          - docker push zigzacks/zigdata
