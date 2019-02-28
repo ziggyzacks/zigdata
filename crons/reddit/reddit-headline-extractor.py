@@ -70,11 +70,9 @@ class RedditHeadlineExtractor:
             subreddits = SUBREDDITS
 
         rows = []
-        for subreddit in subreddits:
-            rows.extend(self._gather_headlines(subreddit))
-        # with ThreadPoolExecutor(cpu_count() * 2) as pool:
-        #     for hls in pool.map(self._gather_headlines, subreddits):
-        #         rows.extend(hls)
+        with ThreadPoolExecutor(cpu_count() * 2) as pool:
+            for hls in pool.map(self._gather_headlines, subreddits):
+                rows.extend(hls)
         return rows
 
     def _gather_headlines(self, subreddit):
