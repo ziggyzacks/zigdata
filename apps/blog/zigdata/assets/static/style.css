@@ -12,7 +12,7 @@ a:hover {
 }
 
 header, footer, div.page {
-    width: 760px;
+    width: 90%;
     margin: 0 auto;
     background: #daeef3;
     padding: 20px 30px;
