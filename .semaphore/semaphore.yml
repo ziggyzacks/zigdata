@@ -9,16 +9,19 @@ blocks:
   - name: Build, tag, & push
     task:
       jobs:
-      - name: build
+      - name: build, tag, push
         commands:
           - checkout
-          - echo build
-          - sleep 1
-      - name: tag
-        commands:
-          - echo tag
-          - sleep 1
-      - name: push
-        commands:
-          - echo push
-          - sleep 1
+          - docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
+          - docker build -t base .
+          - docker tag base zigzacks/zigdata:base
+          - docker push zigzacks/zigdata
+          - docker build -t jupyter apps/jupyter
+          - docker tag jupyter zigzacks/zigdata:jupyter
+          - docker push zigzacks/zigdata
+          - docker build -t reddit crons/reddit
+          - docker tag reddit zigzacks/zigdata:reddit
+          - docker push zigzacks/zigdata
+          - docker build -t blog apps/blog
+          - docker tag blog zigzacks/zigdata:blog
+          - docker push zigzacks/zigdata
