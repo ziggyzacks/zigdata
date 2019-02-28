@@ -12,10 +12,13 @@ blocks:
       - name: build
         commands:
           - checkout
+          - echo build
           - sleep 1
       - name: tag
         commands:
+          - echo tag
           - sleep 1
       - name: push
         commands:
+          - echo push
           - sleep 1
