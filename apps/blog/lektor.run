@@ -1,4 +1,6 @@
 #!/usr/bin/with-contenv sh
 cd $HOME/blog/zigdata
+echo $(ls)
 lektor build --output-path ./
-python -m http.server --directory ./ 8888
+echo $(ls)
+python -m http.server --directory . 8888
