@@ -38,17 +38,11 @@ class RedditHeadlineExtractor:
                                   user_agent=user_agent)
         self.sia = SIA()
         self.fs = s3fs.S3FileSystem()
-        self._pool = BlockingConnectionPool(max_connections=10)
-        self.redis = redis.Redis(connection_pool=self._pool, host='redis-master', port=6379)
-        redis_status = self._check_redis()
-        if not redis_status:
-            raise Exception("Redis connection not healthy")
-
-    def _check_redis(self):
         try:
-            return self.redis.ping()
+            self.redis = redis.Redis(host='redis-master', port=6379)
+            self.redis.ping()
         except:
-            return False
+            raise Exception("failed to establish a connection with redis.")
 
     def _hash(self, s):
         return hashlib.sha224(s.encode()).hexdigest()
