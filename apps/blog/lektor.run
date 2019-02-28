@@ -1,3 +1,4 @@
 #!/usr/bin/with-contenv sh
 cd $HOME/blog/zigdata
-lektor server --port 8888
+lektor build --output-path ./
+python -m http.server --directory ./ 8888
