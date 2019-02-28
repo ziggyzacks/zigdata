@@ -7,10 +7,7 @@ import s3fs
 import time
 import hashlib
 from datetime import datetime
-from time import sleep
 import logging
-import redis
-from redis import BlockingConnectionPool
 from concurrent.futures import ThreadPoolExecutor
 from multiprocessing import cpu_count
 
