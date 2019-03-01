@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: zigzacks/zigdata
-  tag: jupyter
+  tag: blog
   pullPolicy: Always
 
 nameOverride: ""
@@ -14,7 +14,7 @@ fullnameOverride: ""
 
 
 service:
-  type: ClusterIP
+  type: LoadBalancer
   port: 80
   targetPort: http
 

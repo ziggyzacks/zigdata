@@ -1,3 +1,4 @@
 #!/usr/bin/with-contenv sh
 cd $HOME
-python server.py
+gunicorn wsgi:app --bind 0.0.0.0:8888 --worker-class sanic.worker.GunicornWorker &
+nginx -g 'daemon off;'

@@ -19,6 +19,9 @@ RUN adduser -D -g 'www' www && \
 
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
 
+RUN git clone https://github.com/letsencrypt/letsencrypt && cd letsencrypt/
+#RUN ./letsencrypt-auto certonly --debug --standalone -d zigdata.org
+
 # expose the port
 EXPOSE 80
 EXPOSE 443
