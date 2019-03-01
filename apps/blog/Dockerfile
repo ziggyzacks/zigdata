@@ -6,8 +6,8 @@ COPY . blog
 COPY server.py .
 
 # setup s6 services
-RUN mkdir -p /etc/services.d/lektor && \
-    mv blog/lektor.run /etc/services.d/lektor/run
+RUN mkdir -p /etc/services.d/sanic && \
+    mv blog/sanic.run /etc/services.d/sanic/run
 
 # nginx
 RUN adduser -D -g 'www' www && \
