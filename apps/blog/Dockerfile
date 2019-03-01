@@ -1,8 +1,9 @@
 FROM zigzacks/zigdata:base
 
-RUN pip install --upgrade lektor
+RUN pip install --upgrade lektor sanic
 
 COPY . blog
+COPY server.py .
 
 # setup s6 services
 RUN mkdir -p /etc/services.d/lektor && \
@@ -15,8 +16,9 @@ RUN adduser -D -g 'www' www && \
     chown -R www:www /www
 
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
+COPY favicon.ico /var/www/media/images/favicon.ico
 
 # expose the port
-EXPOSE 80
+EXPOSE 8080
 ENTRYPOINT ["/init"]
 CMD []
