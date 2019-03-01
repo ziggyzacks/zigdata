@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: zigzacks/zigdata
-  tag: blog
+  tag: jupyter
   pullPolicy: Always
 
 nameOverride: ""
@@ -14,7 +14,7 @@ fullnameOverride: ""
 
 
 service:
-  type: LoadBalancer
+  type: ClusterIP
   port: 8888
   targetPort: http
 
@@ -29,11 +29,11 @@ ingress:
   hosts:
     - zigdata.org
     - www.zigdata.org
-#  tls:
-#  - hosts:
-#      - zigdata.org
-#      - www.zigdata.org
-#    secretName: zigdata-org-secret
+  tls:
+  - hosts:
+      - zigdata.org
+      - www.zigdata.org
+    secretName: zigdata-org-cert
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
