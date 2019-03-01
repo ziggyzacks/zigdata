@@ -1,9 +1,10 @@
 FROM zigzacks/zigdata:base
 
-RUN pip install --upgrade lektor sanic
+RUN pip install --upgrade lektor sanic gunicorn
 
 COPY . blog
 COPY server.py .
+COPY wsgi.py .
 
 # setup s6 services
 RUN mkdir -p /etc/services.d/sanic && \
@@ -20,6 +21,9 @@ RUN adduser -D -g 'www' www && \
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
 
 # expose the port
+EXPOSE 80
 EXPOSE 8888
+EXPOSE 443
+
 ENTRYPOINT ["/init"]
 CMD []
