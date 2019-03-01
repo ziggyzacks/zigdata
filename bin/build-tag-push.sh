@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
 docker build -t base .
 docker tag base zigzacks/zigdata:base
