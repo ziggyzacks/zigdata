@@ -15,7 +15,7 @@ fullnameOverride: ""
 
 service:
   type: ClusterIP
-  port: 8888
+  port: 80
   targetPort: http
 
 ingress:
