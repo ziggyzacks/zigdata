@@ -20,6 +20,6 @@ RUN adduser -D -g 'www' www && \
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
 
 # expose the port
-EXPOSE 8080
+EXPOSE 8888
 ENTRYPOINT ["/init"]
 CMD []
