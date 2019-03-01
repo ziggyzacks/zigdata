@@ -12,11 +12,12 @@ RUN mkdir -p /etc/services.d/lektor && \
 # nginx
 RUN adduser -D -g 'www' www && \
     mkdir /www && \
+    mkdir -p /var/www/media/images/ && \
+    cp blog/favicon.ico /var/www/media/images/favicon.ico && \
     chown -R www:www /var/lib/nginx && \
     chown -R www:www /www
 
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
-COPY favicon.ico /var/www/media/images/favicon.ico
 
 # expose the port
 EXPOSE 8080
