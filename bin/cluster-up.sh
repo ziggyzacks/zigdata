@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 kops create cluster \
         --zones us-east-1a \
         --node-count 1 \
@@ -7,3 +8,5 @@ kops create cluster \
         --name $NAME
 
 kops update cluster ${NAME} --yes
+
+kops validate cluster
