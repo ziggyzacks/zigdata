@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: kuard
+  annotations:
+    kubernetes.io/ingress.class: "nginx"    
+spec:
+  tls:
+  - hosts:
+    - zigdata.org
+    secretName: zigdata-org-tls
+  rules:
+  - host: zigdata.org
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: kuard
+          servicePort: 80
