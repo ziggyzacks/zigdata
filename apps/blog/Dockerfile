@@ -25,6 +25,7 @@ COPY nginx/nginx.conf /etc/nginx/nginx.conf
 # expose the port
 EXPOSE 80
 EXPOSE 8888
+EXPOSE 8080
 EXPOSE 443
 
 ENTRYPOINT ["/init"]
