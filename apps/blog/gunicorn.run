@@ -1,4 +1,5 @@
 #!/usr/bin/with-contenv sh
 cd $HOME/blog/zigdata
 lektor build -O /var/www/zigdata
+cd $HOME
 gunicorn wsgi:app --bind 0.0.0.0:8888 --worker-class sanic.worker.GunicornWorker
