@@ -1,3 +1,0 @@
-#!/usr/bin/with-contenv sh
-# sleep 3
-# nginx -g 'daemon off;'
