@@ -7,8 +7,10 @@ COPY server.py .
 COPY wsgi.py .
 
 # setup s6 services
-RUN mkdir -p /etc/services.d/sanic && \
-    mv blog/sanic.run /etc/services.d/sanic/run
+RUN mkdir -p /etc/services.d/gunicorn && \
+    mv blog/gunicorn.run /etc/services.d/gunicorn/run && \
+    mkdir -p /etc/services.d/nginx && \
+    mv blog/nginx.run /etc/services.d/nginx/run
 
 # nginx
 RUN adduser -D -g 'www' www && \
