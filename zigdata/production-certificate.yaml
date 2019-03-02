@@ -1,0 +1,21 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: zigdata-org
+  namespace: default
+spec:
+  secretName: zigdata-org-tls
+  commonName: zigdata.org
+  issuerRef:
+    name: letsencrypt-staging
+    kind: ClusterIssuer
+  dnsNames:
+  - zigdata.org
+  - www.zigdata.org
+  acme:
+    config:
+    - http01:
+        ingressClass: nginx
+      domains:
+        - zigdata.org
+        - www.zigdata.org
