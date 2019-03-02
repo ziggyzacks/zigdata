@@ -6,16 +6,15 @@ metadata:
 spec:
   secretName: zigdata-org-tls
   commonName: zigdata.org
+
   issuerRef:
-    name: letsencrypt-staging
+    name: letsencrypt-production
     kind: ClusterIssuer
   dnsNames:
   - zigdata.org
-  - www.zigdata.org
   acme:
     config:
     - http01:
         ingressClass: nginx
       domains:
         - zigdata.org
-        - www.zigdata.org
