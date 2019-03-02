@@ -11,11 +11,9 @@ spec:
     kind: ClusterIssuer
   dnsNames:
   - zigdata.org
-  - www.zigdata.org
   acme:
     config:
     - http01:
         ingressClass: nginx
       domains:
         - zigdata.org
-        - www.zigdata.org

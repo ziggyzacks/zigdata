@@ -69,7 +69,7 @@ while elb is None:
 print('Creating DNS records')
 subs = ['lab']
 add_dns_record('zigdata.org', elb, record_type='a', elb_zone=get_elb('CanonicalHostedZoneNameID'))
-add_dns_record('www.zigdata.org', elb, record_type='a', elb_zone=get_elb('CanonicalHostedZoneNameID'))
+add_dns_record('www.zigdata.org', 'zigdata.org', record_type='a', elb_zone=ZONE_ID)
 for sub in subs:
     add_dns_record(f'{sub}.zigdata.org', elb)
     add_dns_record(f'www.{sub}.zigdata.org', elb)
