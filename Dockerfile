@@ -2,7 +2,7 @@
 FROM frolvlad/alpine-miniconda3
 
 # gcc dependencies and such
-RUN apk add --no-cache bash curl ca-certificates git openssh nginx
+RUN apk add --no-cache bash curl ca-certificates git openssh nginx certbot
 ENV HOME /usr/local/zigdata.org
 RUN mkdir -p $HOME
 

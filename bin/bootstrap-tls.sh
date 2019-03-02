@@ -13,8 +13,4 @@ kubectl label namespace cert-manager certmanager.k8s.io/disable-validation=true
 helm repo update
 
 # Install the cert-manager Helm chart
-helm install \
-  --name cert-manager \
-  --namespace cert-manager \
-  --version v0.6.6 \
-  stable/cert-manager
+helm install --name cert-manager --namespace cert-manager stable/cert-manager
