@@ -1,10 +1,2 @@
 [project]
 name = zigdata
-
-[packages]
-lektor-s3 = 0.5.1
-
-[servers.s3]
-name = S3
-enabled = yes
-target = s3://blog.zigdata.org
