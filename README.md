@@ -4,20 +4,13 @@
 2. ./bin/cluster-up.sh
     - wait for cluster to spin up and become available
 3. ./bin/bootstrap-cluster.sh
-4. # nginx ingress
-    helm install stable/nginx-ingress --name zigdata-ingress \
-    --set controller.stats.enabled=true \
-    --set controller.metrics.enabled=true
-5.  ./bin/deploy.sh
-    - helm install --name redis stable/redis --values redis-production-values
-6. ./bin/bootstrap-tls.sh
+4. ./bin/create-ingress.sh
+    - python setupDNS.py
+5. ./bin/create-cert-manager.sh
     - wait until resources are ready
     - kubectl apply -f zigdata/production-issuer.yaml
     - kubectl apply -f zigdata/staging-issuer.yaml
-    - kubectl apply -f zigdata/production-certificate.yaml
-    - kubectl apply -f zigdata/staging-certificate.yaml
-7. ./bin/deploy.sh to redeploy and get certs connected
-8. wait and then delete zigdata-org certificate
+6. ./bin/deploy.sh
 
 ### Blogging
 hot reloading at zigdata.org
