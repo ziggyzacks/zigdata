@@ -20,15 +20,7 @@
 8. wait and then delete zigdata-org certificate
 
 ### Blogging
-```
-cd apps/blog/zigdata
-# constantly rebuild local
-lektor build -O build --watch &
-# start file watcher to hot reload static pages
-python watcher.py
-```
-
-or for convienence
+hot reloading at zigdata.org
 ```
 ./bin/live-blogging.sh
 ```
