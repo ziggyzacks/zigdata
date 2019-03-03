@@ -4,16 +4,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="zigdata">
-  <link rel="icon" href="{{ '/static/img/favicon.ico'|url }}">
+  <meta name="description" content="My Blog">
+  <meta name="author" content="Andrew Shay">
+  <link rel="icon" href="../../static/img/favicon.ico">
 
-  <title>zigdata</title>
+  <title>My Blog</title>
 
-  <link rel="stylesheet" href="{{ '/static/css/bootstrap.min.css'|url }}">
+  <link rel="stylesheet" href="../../static/css/bootstrap.min.css">
 
   <!-- Custom CSS -->
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-  <link rel="stylesheet" href="{{ '/static/css/custom.css'|url }}">
+  <link rel="stylesheet" href="../../static/css/custom.css">
 </head>
 
 <body>
@@ -24,7 +25,7 @@
       <div class="row flex-nowrap justify-content-between align-items-center">
         <div class="col pt-1">
           <a class="site-header-name" href="/">
-            <h1 class="site-header-name">zigdata</h1>
+            <h1 class="site-header-name">My Blog</h1>
           </a>
         </div>
       </div>
@@ -34,9 +35,19 @@
     <!-- NAVIGATION -->
     <div class="container nav-bar">
       <div class="row nav">
-        {% for href, title in [ ['/', 'Home'], ['/blog', 'Blog'], ['/single-column', 'One Column MD'], ['/single-column-html', 'One Column HTML'], ['/two-column-markdown', 'Two Column MD'], ['/two-column-html', 'Two Column HTML'] ] %}
-          <a class="col-md-auto p-2" href="{{ href|url }}">{{ title }}</a>
-        {% endfor %}
+        
+          <a class="col-md-auto p-2" href="../../">Home</a>
+        
+          <a class="col-md-auto p-2" href="../../blog/">Blog</a>
+        
+          <a class="col-md-auto p-2" href="../../single-column/">One Column MD</a>
+        
+          <a class="col-md-auto p-2" href="../../single-column-html/">One Column HTML</a>
+        
+          <a class="col-md-auto p-2" href="../../two-column-markdown/">Two Column MD</a>
+        
+          <a class="col-md-auto p-2" href="../../two-column-html/">Two Column HTML</a>
+        
       </div>
     </div>
     <!-- END NAVIGATION -->
@@ -46,7 +57,25 @@
       <!-- MAIN BODY -->
       <div class="col">
 
-        {% block body %}{% endblock %}
+        
+  
+  <div class="blog-post">
+    <a class="blog-post-title" href="../../blog/new-post/"><h1 class="blog-post-title">Sample Blog Post Old</h1></a>
+  <p class="blog-post-info text-muted small">
+    written by
+    
+      Andrew Shay
+    
+    on 2018-09-14
+  </p>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ac magna ac ligula scelerisque aliquet id sed
+sem. Mauris
+egestas erat leo, sit amet congue nisl aliquet in. Aliquam bibendum libero eget lectus tincidunt interdum.
+Etiam eget</p>
+
+  </div>
+
+
 
     </div>
   </main>

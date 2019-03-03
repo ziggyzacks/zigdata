@@ -2,7 +2,7 @@ FROM zigzacks/zigdata:base
 
 COPY jupyter.run .
 COPY jupyter_notebook_config.py $HOME/.jupyter/
-COPY favicon.ico .
+COPY ../blog/zigdata/assets/static/img/favicon.ico .
 
 # setup s6 services
 RUN mkdir -p /etc/services.d/jupyter && \

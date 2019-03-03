@@ -2,6 +2,7 @@ import subprocess
 import os
 import hashlib
 import glob
+import itertools
 from collections import defaultdict
 from time import sleep, time
 from skds.log import timeit
@@ -24,7 +25,9 @@ def read_file(path):
 
 
 def get_html_files(root=PATH):
-    return glob.glob(f'{root}/**/*.html', recursive=True)
+    exts = ['html', 'css']
+    for ext in exts:
+        yield glob.glob(f'{root}/**/*.{ext}', recursive=True)
 
 
 def check_hashes(state, files):
@@ -61,7 +64,7 @@ def trigger_copy(path):
 
 
 if __name__ == "__main__":
-    files = get_html_files()
+    files = list(itertools.chain(*get_html_files()))
     state = dict.fromkeys(files)
     while True:
         check_hashes(state, files)
