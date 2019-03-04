@@ -1,3 +1,2 @@
 #!/usr/bin/with-contenv sh
-jupyter-lab --debug &
-nginx -g 'daemon off;'
+jupyter-lab --debug

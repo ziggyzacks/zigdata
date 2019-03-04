@@ -1,5 +1,5 @@
 ssh/* filter=git-crypt diff=git-crypt
 .kube/* filter=git-crypt diff=git-crypt
 zigdata/secrets.yaml filter=git-crypt diff=git-crypt
-app/jupyter/certs filter=git-crypt diff=git-crypt
 *.pem filter=git-crypt diff=git-crypt
+*config.json filter=git-crypt diff=git-crypt

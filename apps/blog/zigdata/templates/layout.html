@@ -16,6 +16,8 @@
   <!-- Custom CSS -->
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link rel="stylesheet" href="{{ '/static/css/custom.css'|url }}">
+  <link rel="stylesheet" href="{{ get_pygments_stylesheet()|url }}">
+
 </head>
 
 <body>
@@ -36,7 +38,7 @@
     <!-- NAVIGATION -->
     <div class="container nav-bar">
       <div class="row nav">
-        {% for href, title in [ ['/', 'Home'], ['/blog', 'Blog'], ['/single-column', 'One Column MD'], ['/single-column-html', 'One Column HTML'], ['/two-column-markdown', 'Two Column MD'], ['/two-column-html', 'Two Column HTML'] ] %}
+        {% for href, title in [ ['/', 'Home'], ['/blog', 'Blog'], ['/notebook', 'Notebook'] ] %}
           <a class="col-md-auto p-2" href="{{ href|url }}">{{ title }}</a>
         {% endfor %}
       </div>
@@ -54,7 +56,7 @@
   </main>
 
   <footer class="site-footer">
-    copyright 2018 My Blog
+    copyright 2018 zigdata.org
   </footer>
 
   <!-- Bootstrap core JavaScript

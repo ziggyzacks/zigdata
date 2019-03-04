@@ -1,0 +1,18 @@
+jobs:
+  - name: reddit
+    image:
+      repository: zigzacks/zigdata
+      tag: reddit
+      pullPolicy: Always
+    schedule: "*/60 * * * *"
+    failedJobsHistoryLimit: 1
+    successfulJobsHistoryLimit: 3
+    concurrencyPolicy: Forbid
+    restartPolicy: OnFailure
+    envFrom:
+      - secretRef:
+          name: reddit-secrets
+      - secretRef:
+          name: aws-secrets
+      - configMapRef:
+          name: reddit-envvars

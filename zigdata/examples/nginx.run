@@ -1,5 +1,0 @@
-#!/usr/bin/with-contenv sh
-nginx -g 'daemon off;' &
-certbot certonly --webroot -w /var/www/zigdata/ --staging --non-interactive --agree-tos
-nginx -s reload
-sleep 100000

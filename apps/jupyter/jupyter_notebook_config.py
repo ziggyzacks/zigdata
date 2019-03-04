@@ -6,14 +6,10 @@ import stat
 
 c = get_config()
 c.NotebookApp.ip = '0.0.0.0'
-c.NotebookApp.port = 8888
+c.NotebookApp.port = 8989
 c.NotebookApp.allow_root = True
 c.NotebookApp.allow_origin = '*'
-# c.NotebookApp.certfile = '/certs/public.pem'
-# c.NotebookApp.keyfile = '/certs/tls.key'
 c.NotebookApp.open_browser = False
-c.NotebookApp.password = ''
-c.NotebookApp.token = ''
 
 # Configuration file for jupyter-notebook.
 # https://github.com/jupyter/notebook/issues/3130

@@ -3,12 +3,10 @@ FROM zigzacks/zigdata:base
 RUN pip install --upgrade lektor sanic gunicorn
 
 COPY . blog
-COPY server.py .
-COPY wsgi.py .
 
 # setup s6 services
-RUN mkdir -p /etc/services.d/gunicorn && \
-    mv blog/gunicorn.run /etc/services.d/gunicorn/run
+RUN mkdir -p /etc/services.d/blog && \
+    mv blog/blog.run /etc/services.d/blog/run
 
 # expose the port
 EXPOSE 8888

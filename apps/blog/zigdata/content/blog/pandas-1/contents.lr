@@ -1,0 +1,12 @@
+title: Pandas Basics
+---
+author: Ziggy Zacks
+---
+pub_date: 2018-09-14
+---
+body:
+
+|                                                                           |
+|-------------------|-------------------------------------------------------|-
+| keywords          | `pandas,python,dataframes,matplotlib,numpy,anaconda`  |
+| prereqs           |  [homebrew](https://brew.sh/), [anaconda](https://www.anaconda.com/distribution/)|
