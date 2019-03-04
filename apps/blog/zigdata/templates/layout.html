@@ -39,7 +39,7 @@
     <div class="container nav-bar">
       <div class="row nav">
         {% for href, title in [ ['/', 'Home'], ['/blog', 'Blog'], ['/notebook', 'Notebook'] ] %}
-          <a class="col-md-auto p-2" href="https://zigdata.org{{ href }}">{{ title }}</a>
+          <a class="col-md-auto p-2" href="{{ href | url }}">{{ title }}</a>
         {% endfor %}
       </div>
     </div>
