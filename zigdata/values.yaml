@@ -27,9 +27,11 @@ ingress:
   paths:
     - /
   hosts:
+    - www.zigdata.org
     - zigdata.org
   tls:
   - hosts:
+      - www.zigdata.org
       - zigdata.org
     secretName: zigdata-org-tls
 

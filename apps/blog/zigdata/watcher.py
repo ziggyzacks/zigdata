@@ -1,10 +1,8 @@
 import subprocess
-import os
 import hashlib
 import glob
 import itertools
-from collections import defaultdict
-from time import sleep, time
+from time import sleep
 from skds.log import timeit
 import datetime
 
@@ -25,9 +23,14 @@ def read_file(path):
 
 
 def get_html_files(root=PATH):
-    exts = ['html', 'css']
+    exts = ['lr']
     for ext in exts:
         yield glob.glob(f'{root}/**/*.{ext}', recursive=True)
+
+
+# todo: figure out how to use actual api instead of invoking like this
+def trigger_build():
+    return subprocess.run("lektor build -O build", shell=True)
 
 
 def check_hashes(state, files):
@@ -43,6 +46,7 @@ def check_hashes(state, files):
                 reload = True
 
     if reload:
+        trigger_build()
         trigger_copy(PATH)
 
 
@@ -59,8 +63,9 @@ def trigger_copy(path):
     pod = take_first_pod(filter="zigdata")
     cmd_copy = f"cd build && echo $(ls) && kubectl cp {path} {pod}:/var/www/zigdata && cd .."
     cmd_exec = f"kubectl exec {pod} -- /bin/ash -c 'cp -ar /var/www/zigdata/zigdata/* /var/www/zigdata'"
-    combined = '&&'.join((cmd_copy, cmd_exec))
-    timeit(subprocess.run(combined, shell=True))
+    combined = ' && '.join((cmd_copy, cmd_exec))
+    print(combined)
+    subprocess.run(combined, shell=True)
 
 
 if __name__ == "__main__":
@@ -68,4 +73,4 @@ if __name__ == "__main__":
     state = dict.fromkeys(files)
     while True:
         check_hashes(state, files)
-        sleep(0.25)
+        sleep(0.5)
