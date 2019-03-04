@@ -1,3 +1,10 @@
+app:
+  reddit:
+    user_agent: zarfjohnson
+deployment:
+  enabled: false
+service:
+  enabled: false
 jobs:
   - name: reddit
     image:

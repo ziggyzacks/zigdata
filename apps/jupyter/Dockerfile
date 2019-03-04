@@ -2,6 +2,7 @@ FROM zigzacks/zigdata:base
 
 COPY jupyter.run .
 COPY jupyter_notebook_config.py $HOME/.jupyter/
+COPY jupyter_notebook_config.json $HOME/.jupyter/
 
 # setup s6 services
 RUN mkdir -p /etc/services.d/jupyter && \

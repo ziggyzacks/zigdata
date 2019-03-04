@@ -1,3 +1,5 @@
+{{- if .Values.deployment.enabled -}}
+{{- $deployment:= .Values.deployment -}}
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
@@ -8,7 +10,7 @@ metadata:
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ $deployment.replicaCount }}
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ include "zigdata.name" . }}
@@ -21,8 +23,8 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: "{{ $deployment.image.repository }}:{{ $deployment.image.tag }}"
+          imagePullPolicy: {{ $deployment.image.pullPolicy }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
@@ -31,16 +33,18 @@ spec:
             - secretRef:
                 name: aws-secrets
           resources:
-{{ toYaml .Values.resources | indent 12 }}
-    {{- with .Values.nodeSelector }}
+{{ toYaml $deployment.resources | indent 12 }}
+    {{- with $deployment.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}
     {{- end }}
-    {{- with .Values.affinity }}
+    {{- with $deployment.affinity }}
       affinity:
 {{ toYaml . | indent 8 }}
     {{- end }}
-    {{- with .Values.tolerations }}
+    {{- with $deployment.tolerations }}
       tolerations:
 {{ toYaml . | indent 8 }}
     {{- end }}
+{{- end }}
+

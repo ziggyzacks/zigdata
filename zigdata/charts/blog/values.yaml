@@ -1,0 +1,31 @@
+deployment:
+  enabled: true
+  replicaCount: 1
+
+  image:
+    repository: zigzacks/zigdata
+    tag: blog
+    pullPolicy: Always
+
+  nameOverride: ""
+  fullnameOverride: ""
+
+  resources:
+     limits:
+      cpu: 100m
+      memory: 128Mi
+     requests:
+      cpu: 50m
+      memory: 64Mi
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
+
+service:
+  enabled: true
+  type: ClusterIP
+  port: 8888
+  targetPort: http
