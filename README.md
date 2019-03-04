@@ -1,6 +1,9 @@
 ## Experiments with a modern stack
 
 ### Steps
+
+#### Edit environment variables
+
 #### Set environment variables
 `source .env`
 
@@ -11,7 +14,7 @@ kops create cluster \
         --node-count 1 \
         --node-size t3.small \
         --master-size t3.medium \
-        --ssh-public-key ssh/zigdata_rsa.pub \
+        --ssh-public-key ssh/zigdata.pub \
         --name $NAME
 
 kops update cluster ${NAME} --yes
@@ -52,13 +55,13 @@ kubectl apply -f zigdata/staging-issuer.yaml
 kubectl apply -f zigdata/production-issuer.yaml
 ```
 
-#### Deploy zidata.org
+#### Deployments
 ```
-cd zigdata
-# delete release if present
-helm del --purge zigdata
-# install
-helm install --debug --name zigdata --namespace default --values values.yaml --values secrets.yaml .
+source .deployer
+# redeploy whole site
+deploy_all
+# redeploy one chart 
+redeploy <chart>
 ```
 
 **optional**

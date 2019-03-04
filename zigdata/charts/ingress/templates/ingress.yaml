@@ -1,6 +1,11 @@
 {{- if .Values.ingress.enabled -}}
 {{- $fullName := include "zigdata.fullname" . -}}
 {{- $ingressPath := .Values.ingress.path -}}
+{{- $index_path := .Values.ingress.svcs.index_path -}}
+{{- $notebook_path := .Values.ingress.svcs.notebook_path -}}
+{{- $jupyter_service := .Values.ingress.svcs.jupyter_service -}}
+{{- $blog_service := .Values.ingress.svcs.blog_service -}}
+
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
@@ -30,9 +35,13 @@ spec:
     - host: {{ . | quote }}
       http:
         paths:
-          - path: {{ $ingressPath }}
-            backend:
-              serviceName: {{ $fullName }}
-              servicePort: http
+        - path: {{ $index_path }}
+          backend:
+            serviceName: {{ $blog_service }}
+            servicePort: http
+        - path: {{ $notebook_path }}
+          backend:
+            serviceName: {{ $jupyter_service }}
+            servicePort: http
   {{- end }}
 {{- end }}
