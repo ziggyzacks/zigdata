@@ -1,0 +1,47 @@
+replicaCount: 1
+
+image:
+  repository: zigzacks/zigdata
+  tag: jupyter
+  pullPolicy: Always
+
+nameOverride: ""
+fullnameOverride: ""
+
+
+service:
+  type: ClusterIP
+  port: 8989
+  targetPort: http
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    certmanager.k8s.io/cluster-issuer: letsencrypt-staging
+    certmanager.k8s.io/acme-challenge-type: http01
+  paths:
+    - /notebook
+  hosts:
+    - www.zigdata.org
+    - zigdata.org
+  tls:
+  - hosts:
+      - www.zigdata.org
+      - zigdata.org
+    secretName: zigdata-org-tls
+
+resources:
+   limits:
+    cpu: 500m
+    memory: 512Mi
+   requests:
+    cpu: 100m
+    memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
