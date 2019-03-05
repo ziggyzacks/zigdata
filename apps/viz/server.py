@@ -1,10 +1,12 @@
+import os
 from bokeh.layouts import column
 from bokeh.models import ColumnDataSource, Slider
 from bokeh.plotting import figure
 from bokeh.server.server import Server
-from bokeh.themes import Theme
 
 from bokeh.sampledata.sea_surface_temperature import sea_surface_temperature
+
+os.environ["BOKEH_LOG_LEVEL"] = "debug"
 
 
 def modify_doc(doc):
