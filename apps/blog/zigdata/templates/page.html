@@ -1,6 +1,33 @@
 {% extends "layout.html" %}
 {% block title %}{{ this.title }}{% endblock %}
 {% block body %}
-  <h2>{{ this.title }}</h2>
+<!-- BLOG POST -->
+<div class="blog-post">
+  <h1 class="blog-post-title">{{ this.title }}</h1>
   {{ this.body }}
+</div>
+<!-- END BLOG POST -->
+
+</div>
+<!-- END MAIN BODY -->
+
+<!-- SIDEBAR -->
+<aside class="col-md-4">
+  <div class="p-3 mb-3 bg-light rounded">
+    <h4>About</h4>
+    <p class="mb-0">
+      I'm Ziggy Zacks, a data scientist living in Brooklyn.
+      Spend most nights thinking about practical, scalable infrastructure to support machine learning & analytics.
+      Have a soft spot for <a href="https://redis.io/">redis</a>, high dimensional spaces, & cooking.
+    </p>
+  </div>
+
+  <div class="p-3">
+    <h4>Links</h4>
+    <ol class="list-unstyled">
+      <li><a href="https://github.com/ziggyzacks">Github</a></li>
+    </ol>
+  </div>
+</aside>
+<!-- END SIDEBAR -->
 {% endblock %}

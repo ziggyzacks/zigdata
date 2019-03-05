@@ -5,8 +5,8 @@ import praw
 import nltk
 import s3fs
 import time
+import hashlib
 from datetime import datetime
-from time import sleep
 import logging
 from concurrent.futures import ThreadPoolExecutor
 from multiprocessing import cpu_count
@@ -35,6 +35,9 @@ class RedditHeadlineExtractor:
                                   user_agent=user_agent)
         self.sia = SIA()
         self.fs = s3fs.S3FileSystem()
+
+    def _hash(self, s):
+        return hashlib.sha224(s.encode()).hexdigest()
 
     @classmethod
     def from_environment(cls):
@@ -72,7 +75,6 @@ class RedditHeadlineExtractor:
         for rank, submission in enumerate(self.reddit.subreddit(subreddit).new(limit=None)):
             title = submission.title
             if title not in new_headlines:
-                new_headlines.add(title)
                 record = {
                     "title": title,
                     "ups": submission.ups,
@@ -83,6 +85,8 @@ class RedditHeadlineExtractor:
                     "rank": rank
                 }
                 records.append(record)
+                new_headlines.add(title)
+
         logger.info(f"Found {len(new_headlines)} new headlines in the {subreddit} subreddit")
         return records
 

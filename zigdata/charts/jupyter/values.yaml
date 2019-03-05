@@ -1,0 +1,37 @@
+service:
+  enabled: true
+  type: ClusterIP
+  port: 8989
+  targetPort: http
+deployment:
+  enabled: true
+  replicaCount: 1
+
+  image:
+    repository: zigzacks/zigdata
+    tag: jupyter
+    pullPolicy: Always
+
+  nameOverride: ""
+  fullnameOverride: ""
+
+  resources:
+     limits:
+      cpu: 500m
+      memory: 512Mi
+     requests:
+      cpu: 100m
+      memory: 128Mi
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
+
+  persistence:
+    accessMode: ReadWriteOnce
+    enabled: true
+    size: 2Gi
+    storageClass: gp2
+#    existingClaim: jupyter-zigdata-jupyter

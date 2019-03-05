@@ -1,0 +1,12 @@
+title: How I made this site
+---
+pub_date: 2018-09-15
+---
+author: Ziggy Zacks
+---
+body:
+
+|                                                                           |
+|-------------------|-------------------------------------------------------|-
+| keywords          | `kubernetes,kops,helm,python,lektor,static,AWS,nginx,cert-manager` |
+| prereqs           |  [homebrew](https://brew.sh/)|

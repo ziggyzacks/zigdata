@@ -1,12 +1,14 @@
 FROM zigzacks/zigdata:base
 
 COPY jupyter.run .
+COPY jupyter_notebook_config.py $HOME/.jupyter/
+COPY jupyter_notebook_config.json $HOME/.jupyter/
 
 # setup s6 services
 RUN mkdir -p /etc/services.d/jupyter && \
     mv jupyter.run /etc/services.d/jupyter/run
 
 # expose the port
-EXPOSE 8888
+EXPOSE 8989
 ENTRYPOINT ["/init"]
 CMD []

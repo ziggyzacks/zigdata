@@ -1,0 +1,27 @@
+function deploy {
+    helm install --debug --name $1 ~/zigdatad/zigdata/charts/$1 --values ~/zigdatad/zigdata/charts/$1/values.yaml --values  ~/zigdatad/zigdata/secrets/secrets.yaml --namespace default
+}
+
+function destroy {
+    helm delete --purge $1
+}
+
+function redeploy {
+    destroy $1
+    deploy $1
+}
+
+function redeploy_all {
+    redeploy volumes
+    redeploy jobs
+    redeploy blog
+    redeploy jupyter
+    redeploy viz
+    redeploy ingress
+}
+
+function redeploy_apps {
+    redeploy blog
+    redeploy jupyter
+    redeploy viz
+}
