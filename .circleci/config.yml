@@ -18,3 +18,6 @@ jobs:
       - run: docker build -t blog apps/blog
       - run: docker tag blog zigzacks/zigdata:blog
       - run: docker push zigzacks/zigdata:blog
+      - run: docker build -t viz apps/viz
+      - run: docker tag viz zigzacks/zigdata:viz
+      - run: docker push zigzacks/zigdata:viz

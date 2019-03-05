@@ -12,3 +12,6 @@ docker push zigzacks/zigdata:reddit
 docker build -t blog apps/blog
 docker tag blog zigzacks/zigdata:blog
 docker push zigzacks/zigdata:blog
+docker build -t viz apps/viz
+docker tag viz zigzacks/zigdata:viz
+docker push zigzacks/zigdata:viz

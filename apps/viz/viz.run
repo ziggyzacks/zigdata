@@ -1,0 +1,3 @@
+#!/usr/bin/with-contenv sh
+cd $HOME/viz
+python server.py

@@ -4,6 +4,8 @@
 {{- $index_path := .Values.ingress.svcs.index_path -}}
 {{- $jupyter_service := .Values.ingress.svcs.jupyter_service -}}
 {{- $blog_service := .Values.ingress.svcs.blog_service -}}
+{{- $viz_service := .Values.ingress.svcs.viz_service -}}
+
 
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -45,5 +47,12 @@ spec:
           - path: /
             backend:
               serviceName: {{ $jupyter_service }}
+              servicePort: http
+    - host: viz.zigdata.org
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: {{ $viz_service }}
               servicePort: http
 {{- end }}
