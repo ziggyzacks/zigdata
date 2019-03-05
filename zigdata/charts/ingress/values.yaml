@@ -8,7 +8,6 @@ ingress:
   svcs:
     index_path: /
     blog_service: blog-zigdata-blog
-    notebook_path: /(notebook-test/api/kernels/[^/]+/(channels|iopub|shell|stdin)|terminals/websocket)/?
     jupyter_service: jupyter-zigdata-jupyter
 
   hosts:
