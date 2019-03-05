@@ -1,0 +1,8 @@
+_model: page
+---
+title: Example Jupyter Notebooks
+---
+_template: page_one_column.html
+---
+body:
+

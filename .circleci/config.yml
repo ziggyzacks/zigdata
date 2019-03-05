@@ -8,13 +8,16 @@ jobs:
       - run: docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
       - run: docker build -t base .
       - run: docker tag base zigzacks/zigdata:base
-      - run: docker push zigzacks/zigdata
+      - run: docker push zigzacks/zigdata:base
       - run: docker build -t jupyter apps/jupyter
       - run: docker tag jupyter zigzacks/zigdata:jupyter
-      - run: docker push zigzacks/zigdata
+      - run: docker push zigzacks/zigdata:jupyter
       - run: docker build -t reddit crons/reddit
       - run: docker tag reddit zigzacks/zigdata:reddit
-      - run: docker push zigzacks/zigdata
+      - run: docker push zigzacks/zigdata:reddit
       - run: docker build -t blog apps/blog
       - run: docker tag blog zigzacks/zigdata:blog
-      - run: docker push zigzacks/zigdata
+      - run: docker push zigzacks/zigdata:blog
+      - run: docker build -t viz apps/viz
+      - run: docker tag viz zigzacks/zigdata:viz
+      - run: docker push zigzacks/zigdata:viz

@@ -49,3 +49,9 @@ flycheck_*.el
 
 # network security
 /network-security.data
+apps/blog/zigdata/build
+
+*.ipynb
+.ipynb_checkpoints
+notebook.html
+hidden
