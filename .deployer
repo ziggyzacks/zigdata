@@ -1,5 +1,5 @@
 function deploy {
-    helm install --debug --name $1 charts/$1 --values charts/$1/values.yaml --values secrets/secrets.yaml --namespace default
+    helm install --debug --name $1 ~/zigdatad/zigdata/charts/$1 --values ~/zigdatad/zigdata/charts/$1/values.yaml --values  ~/zigdatad/zigdata/secrets/secrets.yaml --namespace default
 }
 
 function destroy {
@@ -16,10 +16,12 @@ function redeploy_all {
     redeploy jobs
     redeploy blog
     redeploy jupyter
+    redeploy viz
     redeploy ingress
 }
 
 function redeploy_apps {
     redeploy blog
     redeploy jupyter
+    redeploy viz
 }

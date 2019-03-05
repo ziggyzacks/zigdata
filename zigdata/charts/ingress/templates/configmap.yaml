@@ -17,3 +17,4 @@ data:
   Host: "$host"
   Upgrade: "websocket"
   Connection: "Upgrade"
+  Cache-Control: "public"

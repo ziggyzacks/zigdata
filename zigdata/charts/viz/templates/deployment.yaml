@@ -29,22 +29,8 @@ spec:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
-          envFrom:
-            - secretRef:
-                name: aws-secrets
           resources:
 {{ toYaml $deployment.resources | indent 12 }}
-          volumeMounts:
-          - name: data
-            mountPath: /usr/data/{{ include "zigdata.name" . }}
-      volumes:
-      - name: data
-      {{- if $deployment.persistence.enabled }}
-        persistentVolumeClaim:
-          claimName: volumes-zigdata-volume
-      {{- else }}
-        emptyDir: {}
-      {{- end -}}
     {{- with $deployment.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}

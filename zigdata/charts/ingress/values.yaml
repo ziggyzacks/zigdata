@@ -8,7 +8,7 @@ ingress:
     index_path: /
     blog_service: blog-zigdata-blog
     jupyter_service: jupyter-zigdata-jupyter
-
+    viz_service: viz-zigdata-viz
   hosts:
     - www.zigdata.org
     - zigdata.org
