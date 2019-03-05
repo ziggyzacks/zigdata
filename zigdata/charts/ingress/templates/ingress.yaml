@@ -2,7 +2,6 @@
 {{- $fullName := include "zigdata.fullname" . -}}
 {{- $ingressPath := .Values.ingress.path -}}
 {{- $index_path := .Values.ingress.svcs.index_path -}}
-{{- $notebook_path := .Values.ingress.svcs.notebook_path -}}
 {{- $jupyter_service := .Values.ingress.svcs.jupyter_service -}}
 {{- $blog_service := .Values.ingress.svcs.blog_service -}}
 
@@ -39,9 +38,12 @@ spec:
           backend:
             serviceName: {{ $blog_service }}
             servicePort: http
-        - path: {{ $notebook_path }}
-          backend:
-            serviceName: {{ $jupyter_service }}
-            servicePort: http
   {{- end }}
+    - host: lab.zigdata.org
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: {{ $jupyter_service }}
+              servicePort: http
 {{- end }}

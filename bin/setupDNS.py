@@ -89,7 +89,7 @@ def create_records(elb):
     elb_zone = get_elb('CanonicalHostedZoneNameID')
     add_dns_record('zigdata.org', elb, record_type='a', elb_zone=elb_zone)
     add_dns_record('www.zigdata.org', elb, record_type='a', elb_zone=elb_zone)
-
+    add_dns_record('*.zigdata.org', elb, record_type='a', elb_zone=elb_zone)
 
 if __name__ == "__main__":
     # Instantiate the parser
