@@ -1,2 +1,2 @@
 #!/usr/bin/with-contenv sh
-jupyter-lab --debug
+jupyter-lab
