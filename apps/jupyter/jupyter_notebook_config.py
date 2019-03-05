@@ -10,6 +10,7 @@ c.NotebookApp.port = 8989
 c.NotebookApp.allow_root = True
 c.NotebookApp.allow_origin = '*'
 c.NotebookApp.open_browser = False
+c.NotebookApp.notebook_dir = "/usr/data"
 
 # Configuration file for jupyter-notebook.
 # https://github.com/jupyter/notebook/issues/3130

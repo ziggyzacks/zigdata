@@ -12,6 +12,7 @@ function redeploy {
 }
 
 function deploy_all {
+    redeploy volumes
     redeploy jobs
     redeploy blog
     redeploy jupyter
