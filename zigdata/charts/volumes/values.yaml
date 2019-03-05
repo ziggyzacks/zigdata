@@ -1,0 +1,5 @@
+persistence:
+  accessMode: ReadWriteOnce
+  enabled: true
+  size: 2Gi
+  storageClass: gp2

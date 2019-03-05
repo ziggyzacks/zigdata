@@ -34,6 +34,17 @@ spec:
                 name: aws-secrets
           resources:
 {{ toYaml $deployment.resources | indent 12 }}
+          volumeMounts:
+          - name: data
+            mountPath: /usr/data/
+      volumes:
+      - name: data
+      {{- if $deployment.persistence.enabled }}
+        persistentVolumeClaim:
+          claimName: volumes-zigdata-volume
+      {{- else }}
+        emptyDir: {}
+      {{- end -}}
     {{- with $deployment.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}

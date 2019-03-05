@@ -29,3 +29,9 @@ deployment:
 
   affinity: {}
 
+  persistence:
+    accessMode: ReadWriteOnce
+    enabled: true
+    size: 2Gi
+    storageClass: gp2
+#    existingClaim: jupyter-zigdata-jupyter
