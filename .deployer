@@ -11,10 +11,15 @@ function redeploy {
     deploy $1
 }
 
-function deploy_all {
+function redeploy_all {
     redeploy volumes
     redeploy jobs
     redeploy blog
     redeploy jupyter
     redeploy ingress
+}
+
+function redeploy_apps {
+    redeploy blog
+    redeploy jupyter
 }
