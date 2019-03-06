@@ -1,0 +1,7 @@
+_model: plot
+---
+title: Sample Plot
+---
+_template: plot.html
+---
+body:
