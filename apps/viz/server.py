@@ -30,7 +30,7 @@ def modify_doc(doc):
     doc.add_root(column(slider, plot))
 
 
-server = Server({'/': modify_doc}, num_procs=4, allow_websocket_origin=['viz.zigdata.org', 'localhost:8787'], port=8787)
+server = Server({'/': modify_doc}, num_procs=4, allow_websocket_origin=['*'], port=8787)
 server.start()
 
 if __name__ == '__main__':

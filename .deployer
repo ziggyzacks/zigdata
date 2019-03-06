@@ -1,5 +1,5 @@
 function deploy {
-    helm install --debug --name $1 ~/zigdatad/zigdata/charts/$1 --values ~/zigdatad/zigdata/charts/$1/values.yaml --values  ~/zigdatad/zigdata/secrets/secrets.yaml --namespace default
+    helm install --debug --name $1 ~/zigdata/zigdata/charts/$1 --values ~/zigdata/zigdata/charts/$1/values.yaml --values  ~/zigdata/zigdata/secrets/secrets.yaml --namespace default
 }
 
 function destroy {

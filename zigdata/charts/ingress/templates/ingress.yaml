@@ -38,21 +38,13 @@ spec:
         paths:
         - path: {{ $index_path }}
           backend:
+        {{- if eq . "lab.translit.io" }}
+            serviceName: {{ $jupyter_service }}
+        {{- else if eq . "viz.translit.io" }}
+            serviceName: {{ $viz_service }}
+        {{- else }}
             serviceName: {{ $blog_service }}
+        {{- end }}
             servicePort: http
   {{- end }}
-    - host: lab.zigdata.org
-      http:
-        paths:
-          - path: /
-            backend:
-              serviceName: {{ $jupyter_service }}
-              servicePort: http
-    - host: viz.zigdata.org
-      http:
-        paths:
-          - path: /
-            backend:
-              serviceName: {{ $viz_service }}
-              servicePort: http
 {{- end }}

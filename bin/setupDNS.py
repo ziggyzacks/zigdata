@@ -67,6 +67,7 @@ def add_dns_record(source, target, record_type='cname', ttl=30, elb_zone=None, z
 
 
 def get_elb(field='DNSName'):
+    # todo: make this fetch based on something other than being first
     try:
         dns = elb_client.describe_load_balancers()['LoadBalancerDescriptions'][0][field]
     except:
@@ -84,18 +85,29 @@ def wait_for_elb():
     return elb
 
 
-def create_records(elb):
+def get_domain_from_zone(zone):
+    return client.get_hosted_zone(Id=zone)['HostedZone']['Name'][:-1]
+
+
+def create_records(elb, zone_id):
     print('Creating DNS records')
     elb_zone = get_elb('CanonicalHostedZoneNameID')
-    add_dns_record('zigdata.org', elb, record_type='a', elb_zone=elb_zone)
-    add_dns_record('www.zigdata.org', elb, record_type='a', elb_zone=elb_zone)
-    add_dns_record('*.zigdata.org', elb, record_type='a', elb_zone=elb_zone)
+    domain = get_domain_from_zone(zone_id)
+    add_dns_record(domain, elb, record_type='a', elb_zone=elb_zone, zone_id=zone_id)
+    add_dns_record(f'www.{domain}', elb, record_type='a', elb_zone=elb_zone, zone_id=zone_id)
+    add_dns_record(f'*.{domain}', elb, record_type='a', elb_zone=elb_zone, zone_id=zone_id)
+
 
 if __name__ == "__main__":
     # Instantiate the parser
     parser = argparse.ArgumentParser(description='Creates Route53 DNS records assuming 1 ELB in hosted zone')
-    parser.add_argument('--zone', type=str,
+    parser.add_argument('--zone', type=str, default=os.environ.get('HOSTED_ZONE_ID'),
                         help='AWS Route53 Zone ID, defaults to HOSTED_ZONE_ID environment variable')
+    parser.add_argument('--elb', type=str,
+                        help='Specific ELB to use')
     args = parser.parse_args()
-    elb = wait_for_elb()
-    create_records(elb)
+    if args.elb is None:
+        elb = wait_for_elb()
+    else:
+        elb = args.elb
+    create_records(zone_id=args.zone, elb=elb)

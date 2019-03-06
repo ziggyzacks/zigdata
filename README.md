@@ -14,7 +14,7 @@ kops create cluster \
         --node-count 1 \
         --node-size t3.small \
         --master-size t3.medium \
-        --ssh-public-key ssh/zigdata.pub \
+        --ssh-public-key $SSH \
         --name $NAME
 
 kops update cluster ${NAME} --yes
