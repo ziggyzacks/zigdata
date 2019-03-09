@@ -29,6 +29,17 @@ spec:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
+          env:
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                 name: cache-redis
+                 key: redis-password
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                 name: db-postgresql
+                 key: postgresql-password
           resources:
 {{ toYaml $deployment.resources | indent 12 }}
     {{- with $deployment.nodeSelector }}

@@ -55,6 +55,13 @@ kubectl apply -f zigdata/staging-issuer.yaml
 kubectl apply -f zigdata/production-issuer.yaml
 ```
 
+### Bootstrap infrastructure stuff
+```
+helm install --name heapster stable/heapster --namespace kube-system
+helm install --name db stable/postgresql
+helm install --name cache stable/redis
+```
+
 #### Deployments
 ```
 source .deployer
@@ -62,14 +69,6 @@ source .deployer
 deploy_all
 # redeploy one chart 
 redeploy <chart>
-```
-
-**optional**
-```
-helm install --name heapster stable/heapster --namespace kube-system
-helm install --name dashboard stable/kubernetes-dashboard --namespace kube-system
-helm install --name postgres stable/postgresql
-helm install --name redis stable/redis
 ```
 
 ### Blogging

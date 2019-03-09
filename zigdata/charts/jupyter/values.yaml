@@ -3,6 +3,7 @@ service:
   type: ClusterIP
   port: 8989
   targetPort: http
+
 deployment:
   enabled: true
   replicaCount: 1
@@ -34,4 +35,3 @@ deployment:
     enabled: true
     size: 2Gi
     storageClass: gp2
-#    existingClaim: jupyter-zigdata-jupyter
